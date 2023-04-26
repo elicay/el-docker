@@ -8,7 +8,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /home/errold/jellyfin:/config
+      - /home/errold/.jellyfin:/config
       - /media/errold/data/movies:/data/movies
       - /media/errold/data/tv:/tv
       - /media/errold/data/music:/music
@@ -26,7 +26,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /home/errold/transmission:/config
+      - /home/errold/.transmission:/config
       - /media/errold/data/torrent/downloads:/downloads
       - /media/errold/data/torrent/watch:/watch
     ports:
@@ -45,7 +45,7 @@ services:
       - TZ=Etc/UTC
       - VERSION=docker
     volumes:
-      - /home/errold/plex:/config
+      - /home/errold/.plex:/config
       - /media/errold/data/tv:/tv
       - /media/errold/data/movies:/movies
     restart: unless-stopped
