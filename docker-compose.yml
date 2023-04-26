@@ -1,0 +1,51 @@
+version: "2.1"
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /home/errold/jellyfin:/config
+      - /media/errold/data/movies:/data/movies
+      - /media/errold/data/tv:/tv
+      - /media/errold/data/music:/music
+      - /media/errold/personal/books:/data/books
+      - /media/errold/personal/tutorials:/data/tutorials
+    ports:
+      - 8096:8096
+    restart: unless-stopped
+
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /home/errold/transmission:/config
+      - /media/errold/data/torrent/downloads:/downloads
+      - /media/errold/data/torrent/watch:/watch
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped
+
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - VERSION=docker
+    volumes:
+      - /home/errold/plex:/config
+      - /media/errold/data/tv:/tv
+      - /media/errold/data/movies:/movies
+    restart: unless-stopped
