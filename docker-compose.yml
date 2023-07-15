@@ -8,12 +8,11 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /home/errold/.jellyfin:/config
-      - /media/errold/data/movies:/data/movies
-      - /media/errold/data/tv:/tv
-      - /media/errold/data/music:/music
-      - /media/errold/personal/books:/data/books
-      - /media/errold/personal/tutorials:/data/tutorials
+      - /mnt/data/docker/.jellyfin:/config
+      - /mnt/data/movies:/movies
+      - /mnt/data/tv:/data/tv
+      - /mnt/data/music:/music
+      - /mnt/data/tutorials:/tutorials
     ports:
       - 8096:8096
     restart: unless-stopped
@@ -26,9 +25,8 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /home/errold/.transmission:/config
-      - /media/errold/data/torrent/downloads:/downloads
-      - /media/errold/data/torrent/watch:/watch
+      - /mnt/data/docker/.transmission:/config
+      - /mnt/data/torrent/downloads:/downloads
     ports:
       - 9091:9091
       - 51412:51412
@@ -45,17 +43,17 @@ services:
       - TZ=Etc/UTC
       - VERSION=docker
     volumes:
-      - /home/errold/.plex:/config
-      - /media/errold/data/tv:/tv
-      - /media/errold/data/movies:/movies
+      - /mnt/data/docker/.plex:/config
+      - /mnt/data/tv:/tv
+      - /mnt/data/movies:/movies
     restart: unless-stopped
 
   kavita:
     container_name: kavita
     image: kizaing/kavita:latest
     volumes:
-      - /media/errold/personal/books:/books
-      - /home/errold/.kavita:/kavita/config
+      - /mnt/data/docker/.kavita:/kavita/config
+      - /mnt/data/books:/books
     ports:
       - "5000:5000"
     restart: unless-stopped
@@ -68,9 +66,9 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /home/errold/.radarr:/config
-      - /media/errold/data/movies:/movies
-      - /media/errold/data/torrent/downloads/complete/radarr:/downloads
+      - /mnt/data/docker/.radarr:/config
+      - /mnt/data/movies:/movies
+      - /mnt/data/torrent/downloads/complete/radarr:/downloads
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -83,9 +81,9 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /home/errold/.sonarr:/config
-      - /media/errold/data/tv:/tv
-      - /media/errold/data/torrent/downloads/complete/sonarr:/downloads
+      - /mnt/data/docker/.sonarr:/config
+      - /mnt/data/tv:/tv
+      - /mnt/data/torrent/downloads/complete/sonarr:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -113,7 +111,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /home/errold/.prowlarr:/config
+      - /mnt/data/docker/.prowlarr:/config
     ports:
       - 9696:9696
     restart: unless-stopped
