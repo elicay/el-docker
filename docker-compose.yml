@@ -8,7 +8,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /mnt/data/docker/.jellyfin:/config
+      - /home/errold/docker/.jellyfin:/config
       - /mnt/data/movies:/movies
       - /mnt/data/tv:/tv
       - /mnt/data/music:/music
@@ -24,7 +24,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /mnt/data/docker/.transmission:/config
+      - /home/errold/docker/.transmission:/config
       - /mnt/data/torrent/downloads:/downloads
     ports:
       - 9091:9091
@@ -42,7 +42,7 @@ services:
       - TZ=Etc/UTC
       - VERSION=docker
     volumes:
-      - /mnt/data/docker/.plex:/config
+      - /home/errold/docker/.plex:/config
       - /mnt/data/tv:/tv
       - /mnt/data/movies:/movies
     restart: unless-stopped
@@ -65,7 +65,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /mnt/data/docker/.radarr:/config
+      - /home/errold/docker/.radarr:/config
       - /mnt/data/movies:/movies
       - /mnt/data/torrent/downloads/complete/radarr:/downloads
     ports:
@@ -80,7 +80,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /mnt/data/docker/.sonarr:/config
+      - /home/errold/docker/.sonarr:/config
       - /mnt/data/tv:/tv
       - /mnt/data/torrent/downloads/complete/sonarr:/downloads
     ports:
@@ -110,7 +110,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /mnt/data/docker/.prowlarr:/config
+      - /home/errold/docker/.prowlarr:/config
     ports:
       - 9696:9696
     restart: unless-stopped
