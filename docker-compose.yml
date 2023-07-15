@@ -12,6 +12,7 @@ services:
       - /mnt/data/movies:/movies
       - /mnt/data/tv:/tv
       - /mnt/data/music:/music
+      - /mnt/data/tutorials:/tutorials
     ports:
       - 8096:8096
     restart: unless-stopped
