@@ -10,7 +10,7 @@ services:
     volumes:
       - /mnt/data/docker/.jellyfin:/config
       - /mnt/data/movies:/movies
-      - /mnt/data/tv:/data/tv
+      - /mnt/data/tv:/tv
       - /mnt/data/music:/music
     ports:
       - 8096:8096
