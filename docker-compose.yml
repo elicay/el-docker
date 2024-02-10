@@ -33,20 +33,20 @@ services:
       - 51412:51412/udp
     restart: unless-stopped
 
-  plex:
-    image: lscr.io/linuxserver/plex:latest
-    container_name: plex
-    network_mode: host
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - VERSION=docker
-    volumes:
-      - /home/errold/docker/.plex:/config
-      - /mnt/data/tv:/tv
-      - /mnt/data/movies:/movies
-    restart: unless-stopped
+  # plex:
+  #   image: lscr.io/linuxserver/plex:latest
+  #   container_name: plex
+  #   network_mode: host
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Etc/UTC
+  #     - VERSION=docker
+  #   volumes:
+  #     - /home/errold/docker/.plex:/config
+  #     - /mnt/data/tv:/tv
+  #     - /mnt/data/movies:/movies
+  #   restart: unless-stopped
 
   kavita:
     container_name: kavita
@@ -58,35 +58,35 @@ services:
       - '5000:5000'
     restart: unless-stopped
 
-  radarr:
-    image: lscr.io/linuxserver/radarr:latest
-    container_name: radarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - /home/errold/docker/.radarr:/config
-      - /mnt/data/movies:/movies
-      - /mnt/data/torrent/downloads/complete/radarr:/downloads
-    ports:
-      - 7878:7878
-    restart: unless-stopped
+  # radarr:
+  #   image: lscr.io/linuxserver/radarr:latest
+  #   container_name: radarr
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Etc/UTC
+  #   volumes:
+  #     - /home/errold/docker/.radarr:/config
+  #     - /mnt/data/movies:/movies
+  #     - /mnt/data/torrent/downloads/complete/radarr:/downloads
+  #   ports:
+  #     - 7878:7878
+  #   restart: unless-stopped
 
-  sonarr:
-    image: lscr.io/linuxserver/sonarr:latest
-    container_name: sonarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - /home/errold/docker/.sonarr:/config
-      - /mnt/data/tv:/tv
-      - /mnt/data/torrent/downloads/complete/sonarr:/downloads
-    ports:
-      - 8989:8989
-    restart: unless-stopped
+  # sonarr:
+  #   image: lscr.io/linuxserver/sonarr:latest
+  #   container_name: sonarr
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Etc/UTC
+  #   volumes:
+  #     - /home/errold/docker/.sonarr:/config
+  #     - /mnt/data/tv:/tv
+  #     - /mnt/data/torrent/downloads/complete/sonarr:/downloads
+  #   ports:
+  #     - 8989:8989
+  #   restart: unless-stopped
 
   sql-server-db:
     container_name: sql-server-db
