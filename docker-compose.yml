@@ -33,21 +33,6 @@ services:
       - 51412:51412/udp
     restart: unless-stopped
 
-  # plex:
-  #   image: lscr.io/linuxserver/plex:latest
-  #   container_name: plex
-  #   network_mode: host
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Etc/UTC
-  #     - VERSION=docker
-  #   volumes:
-  #     - /home/errold/docker/.plex:/config
-  #     - /mnt/data/tv:/tv
-  #     - /mnt/data/movies:/movies
-  #   restart: unless-stopped
-
   kavita:
     container_name: kavita
     image: kizaing/kavita:latest
@@ -57,6 +42,73 @@ services:
     ports:
       - '5000:5000'
     restart: unless-stopped
+
+  sql-server-db:
+    container_name: sql-server-db
+    image: mcr.microsoft.com/mssql/server:2022-preview-ubuntu-22.04
+    ports:
+      - '1433:1433'
+    environment:
+      MSSQL_SA_PASSWORD: '!Errold1x'
+      ACCEPT_EULA: 'Y'
+
+    freqtrade:
+      image: freqtradeorg/freqtrade:stable
+      restart: unless-stopped
+      container_name: freqtrade
+      volumes:
+        - '/mnt/data/freqtrade/user_data:/freqtrade/user_data'
+      ports:
+        - '127.0.0.1:8080:8080'
+      command: >
+        trade
+        --logfile /freqtrade/user_data/logs/freqtrade.log
+        --db-url sqlite:////freqtrade/user_data/tradesv3.sqlite
+        --config /freqtrade/user_data/config.json
+        --strategy SampleStrategy
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /home/errold/docker/.prowlarr:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+
+  # lidarr:
+  #   image: lscr.io/linuxserver/lidarr:latest
+  #   container_name: lidarr
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Etc/UTC
+  #   volumes:
+  #     - /path/to/appdata/config:/config
+  #     - /path/to/music:/music #optional
+  #     - /path/to/downloads:/downloads #optional
+  #   ports:
+  #     - 8686:8686
+  #   restart: unless-stopped
+
+  # readarr:
+  #   image: lscr.io/linuxserver/readarr:develop
+  #   container_name: readarr
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Europe/London
+  #   volumes:
+  #     - /home/errold/.readarr:/config
+  #     - /media/errold/personal/books:/books
+  #     - /media/errold/data/torrent/downloads/complete/readarr:/downloads
+  #   ports:
+  #     - 8787:8787
+  #   restart: unless-stopped
 
   # radarr:
   #   image: lscr.io/linuxserver/radarr:latest
@@ -88,54 +140,17 @@ services:
   #     - 8989:8989
   #   restart: unless-stopped
 
-  sql-server-db:
-    container_name: sql-server-db
-    image: mcr.microsoft.com/mssql/server:2022-preview-ubuntu-22.04
-    ports:
-      - '1433:1433'
-    environment:
-      MSSQL_SA_PASSWORD: '!Errold1x'
-      ACCEPT_EULA: 'Y'
-
-  # readarr:
-  #   image: lscr.io/linuxserver/readarr:develop
-  #   container_name: readarr
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Europe/London
-  #   volumes:
-  #     - /home/errold/.readarr:/config
-  #     - /media/errold/personal/books:/books
-  #     - /media/errold/data/torrent/downloads/complete/readarr:/downloads
-  #   ports:
-  #     - 8787:8787
-  #   restart: unless-stopped
-
-  prowlarr:
-    image: lscr.io/linuxserver/prowlarr:latest
-    container_name: prowlarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - /home/errold/docker/.prowlarr:/config
-    ports:
-      - 9696:9696
-    restart: unless-stopped
-
-  # lidarr:
-  #   image: lscr.io/linuxserver/lidarr:latest
-  #   container_name: lidarr
+  # plex:
+  #   image: lscr.io/linuxserver/plex:latest
+  #   container_name: plex
+  #   network_mode: host
   #   environment:
   #     - PUID=1000
   #     - PGID=1000
   #     - TZ=Etc/UTC
+  #     - VERSION=docker
   #   volumes:
-  #     - /path/to/appdata/config:/config
-  #     - /path/to/music:/music #optional
-  #     - /path/to/downloads:/downloads #optional
-  #   ports:
-  #     - 8686:8686
+  #     - /home/errold/docker/.plex:/config
+  #     - /mnt/data/tv:/tv
+  #     - /mnt/data/movies:/movies
   #   restart: unless-stopped
