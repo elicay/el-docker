@@ -156,7 +156,7 @@ services:
 
   mongo:
     image: mongo
-    container_name: calibre
+    container_name: mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password
