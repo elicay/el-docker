@@ -165,6 +165,9 @@ services:
     volumes:
       - /mnt/data/mongo:/data/db
 
+volumes:
+  /mnt/data:
+
   # sql-server-db:
   #   image: mcr.microsoft.com/mssql/server:2022-preview-ubuntu-22.04
   #   container_name: sql-server-db
