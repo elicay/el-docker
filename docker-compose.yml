@@ -156,7 +156,7 @@ services:
 
   mongodb:
     image: mongo:latest
-    container_name: readarr
+    container_name: mongodb
     ports:
       - 27017:27017
     environment:
