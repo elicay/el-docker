@@ -1,158 +1,158 @@
 version: '3'
 services:
-  # jellyfin:
-  #   image: lscr.io/linuxserver/jellyfin:latest
-  #   container_name: jellyfin
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Etc/UTC
-  #   volumes:
-  #     - /mnt/data/config/jellyfin:/config
-  #     - /mnt/data/movies:/movies
-  #     - /mnt/data/tv:/tv
-  #     - /mnt/data/music:/music
-  #     - /mnt/data/tutorials:/tutorials
-  #   ports:
-  #     - 8096:8096
-  #   restart: unless-stopped
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /mnt/data/config/jellyfin:/config
+      - /mnt/data/movies:/movies
+      - /mnt/data/tv:/tv
+      - /mnt/data/music:/music
+      - /mnt/data/tutorials:/tutorials
+    ports:
+      - 8096:8096
+    restart: unless-stopped
 
-  # plex:
-  #   image: lscr.io/linuxserver/plex:latest
-  #   container_name: plex
-  #   network_mode: host
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Etc/UTC
-  #     - VERSION=docker
-  #   volumes:
-  #     - /mnt/data/config/plex:/config
-  #     - /mnt/data/movies:/movies
-  #     - /mnt/data/tv:/tv
-  #     - /mnt/data/music:/music
-  #     - /mnt/data/tutorials:/tutorials
-  #   restart: unless-stopped
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - VERSION=docker
+    volumes:
+      - /mnt/data/config/plex:/config
+      - /mnt/data/movies:/movies
+      - /mnt/data/tv:/tv
+      - /mnt/data/music:/music
+      - /mnt/data/tutorials:/tutorials
+    restart: unless-stopped
 
-  # kavita:
-  #   image: jvmilazz0/kavita:latest
-  #   container_name: kavita
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Etc/UTC
-  #   volumes:
-  #     - /mnt/data/config/kavita:/kavita/config
-  #     - /mnt/data/books:/books
-  #   ports:
-  #     - '5000:5000'
-  #   restart: unless-stopped
+  kavita:
+    image: jvmilazz0/kavita:latest
+    container_name: kavita
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /mnt/data/config/kavita:/kavita/config
+      - /mnt/data/books:/books
+    ports:
+      - '5000:5000'
+    restart: unless-stopped
 
-  # transmission:
-  #   image: lscr.io/linuxserver/transmission:latest
-  #   container_name: transmission
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Etc/UTC
-  #   volumes:
-  #     - /mnt/data/config/transmission:/config
-  #     - /mnt/data/torrent/downloads:/downloads
-  #   ports:
-  #     - 9091:9091
-  #     - 51412:51412
-  #     - 51412:51412/udp
-  #   restart: unless-stopped
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /mnt/data/config/transmission:/config
+      - /mnt/data/torrent/downloads:/downloads
+    ports:
+      - 9091:9091
+      - 51412:51412
+      - 51412:51412/udp
+    restart: unless-stopped
 
-  # prowlarr:
-  #   image: lscr.io/linuxserver/prowlarr:latest
-  #   container_name: prowlarr
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Etc/UTC
-  #   volumes:
-  #     - /mnt/data/config/prowlarr:/config
-  #   ports:
-  #     - 9696:9696
-  #   restart: unless-stopped
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /mnt/data/config/prowlarr:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
 
-  # lidarr:
-  #   image: lscr.io/linuxserver/lidarr:latest
-  #   container_name: lidarr
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Etc/UTC
-  #   volumes:
-  #     - /mnt/data/config/lidarr:/config
-  #     - /mnt/data/music:/music 
-  #     - /mnt/data/torrent/downloads/complete/lidarr:/downloads
-  #   ports:
-  #     - 8686:8686
-  #   restart: unless-stopped
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /mnt/data/config/lidarr:/config
+      - /mnt/data/music:/music 
+      - /mnt/data/torrent/downloads/complete/lidarr:/downloads
+    ports:
+      - 8686:8686
+    restart: unless-stopped
 
-  # readarr:
-  #   image: lscr.io/linuxserver/readarr:develop
-  #   container_name: readarr
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Europe/London
-  #   volumes:
-  #     - /mnt/data/config/readarr:/config
-  #     - /mnt/data/books:/books
-  #     - /mnt/data/torrent/downloads/complete/readarr:/downloads
-  #   ports:
-  #     - 8787:8787
-  #   restart: unless-stopped
+  readarr:
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /mnt/data/config/readarr:/config
+      - /mnt/data/books:/books
+      - /mnt/data/torrent/downloads/complete/readarr:/downloads
+    ports:
+      - 8787:8787
+    restart: unless-stopped
 
-  # radarr:
-  #   image: lscr.io/linuxserver/radarr:latest
-  #   container_name: radarr
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Etc/UTC
-  #   volumes:
-  #     - /mnt/data/config/radarr:/config
-  #     - /mnt/data/movies:/movies
-  #     - /mnt/data/torrent/downloads/complete/radarr:/downloads
-  #   ports:
-  #     - 7878:7878
-  #   restart: unless-stopped
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /mnt/data/config/radarr:/config
+      - /mnt/data/movies:/movies
+      - /mnt/data/torrent/downloads/complete/radarr:/downloads
+    ports:
+      - 7878:7878
+    restart: unless-stopped
 
-  # sonarr:
-  #   image: lscr.io/linuxserver/sonarr:latest
-  #   container_name: sonarr
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Etc/UTC
-  #   volumes:
-  #     - /mnt/data/config/sonarr:/config
-  #     - /mnt/data/tv:/tv
-  #     - /mnt/data/torrent/downloads/complete/sonarr:/downloads
-  #   ports:
-  #     - 8989:8989
-  #   restart: unless-stopped
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /mnt/data/config/sonarr:/config
+      - /mnt/data/tv:/tv
+      - /mnt/data/torrent/downloads/complete/sonarr:/downloads
+    ports:
+      - 8989:8989
+    restart: unless-stopped
 
-  # calibre:
-  #   image: lscr.io/linuxserver/calibre:latest
-  #   container_name: calibre
-  #   security_opt:
-  #     - seccomp:unconfined 
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Etc/UTC
-  #   volumes:
-  #     - /mnt/data/config/calibre:/config
-  #   ports:
-  #     - 8080:8080
-  #     - 8181:8181
-  #     - 8081:8081
-  #   restart: unless-stopped
+  calibre:
+    image: lscr.io/linuxserver/calibre:latest
+    container_name: calibre
+    security_opt:
+      - seccomp:unconfined 
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /mnt/data/config/calibre:/config
+    ports:
+      - 8080:8080
+      - 8181:8181
+      - 8081:8081
+    restart: unless-stopped
 
   mongodb:
     image: mongo:latest
@@ -161,17 +161,8 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=!admin1x
-
-  # mongo-express:
-  #   image: mongo-express
-  #   ports:
-  #     - 8081:8081
-  #   environment:
-  #     - ME_CONFIG_MONGODB_ADMINUSERNAME=root
-  #     - ME_CONFIG_MONGODB_ADMINPASSWORD=!admin1x
-  #     - ME_CONFIG_MONGODB_SERVER=mongodb
-  #   depends_on:
-  #     - mongodb
+    volumes:
+      - /mnt/data/mongo:/data/db
 
   # sql-server-db:
   #   image: mcr.microsoft.com/mssql/server:2022-preview-ubuntu-22.04
