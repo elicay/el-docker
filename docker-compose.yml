@@ -160,8 +160,8 @@ services:
     ports:
       - 27017:27017
     environment:
-      # - PUID=1000
-      # - PGID=1000
+      - PUID=1000
+      - PGID=1000
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=!admin1x
     volumes:
