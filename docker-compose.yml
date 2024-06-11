@@ -1,21 +1,21 @@
 version: '3'
 services:
-  jellyfin:
-    image: lscr.io/linuxserver/jellyfin:latest
-    container_name: jellyfin
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - /mnt/data/config/jellyfin:/config
-      - /mnt/data/movies:/movies
-      - /mnt/data/tv:/tv
-      - /mnt/data/music:/music
-      - /mnt/data/tutorials:/tutorials
-    ports:
-      - 8096:8096
-    restart: unless-stopped
+  # jellyfin:
+  #   image: lscr.io/linuxserver/jellyfin:latest
+  #   container_name: jellyfin
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Etc/UTC
+  #   volumes:
+  #     - /mnt/data/config/jellyfin:/config
+  #     - /mnt/data/movies:/movies
+  #     - /mnt/data/tv:/tv
+  #     - /mnt/data/music:/music
+  #     - /mnt/data/tutorials:/tutorials
+  #   ports:
+  #     - 8096:8096
+  #   restart: unless-stopped
 
   # plex:
   #   image: lscr.io/linuxserver/plex:latest
@@ -154,13 +154,13 @@ services:
   #     - 8081:8081
   #   restart: unless-stopped
 
-  # mongodb:
-  #   image: mongo
-  #   ports:
-  #     - 27017:27017
-  #   environment:
-  #     - MONGO_INITDB_ROOT_USERNAME=root
-  #     - MONGO_INITDB_ROOT_PASSWORD=!admin1x
+  mongodb:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=!admin1x
 
   # mongo-express:
   #   image: mongo-express
