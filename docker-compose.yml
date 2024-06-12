@@ -32,6 +32,8 @@ services:
       - /mnt/data/tv:/tv
       - /mnt/data/music:/music
       - /mnt/data/tutorials:/tutorials
+    ports:
+      - 32400:32400 
     restart: unless-stopped
 
   kavita:
