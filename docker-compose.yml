@@ -34,6 +34,7 @@ services:
       - /mnt/data/tutorials:/tutorials
     ports:
       - 32400:32400 
+      - 8324:8324
     restart: unless-stopped
 
   kavita:
