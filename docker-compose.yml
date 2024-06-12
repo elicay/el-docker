@@ -26,6 +26,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
       - VERSION=docker
+      - PLEX_CLAIM=claim-S6zsEvddnqDvCGSMxULG
     volumes:
       - /mnt/data/config/plex:/config
       - /mnt/data/movies:/movies
