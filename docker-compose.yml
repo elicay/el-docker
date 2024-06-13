@@ -163,7 +163,7 @@ services:
     restart: always
     environment:
       - ACCEPT_EULA=Y
-      - MSA_PASSWORD=!adminpass123
+      - MSSQL_SA_PASSWORD=!adminpass123
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
