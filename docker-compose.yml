@@ -102,7 +102,7 @@ services:
       - TZ=Europe/London
     volumes:
       - /mnt/data/config/readarr:/config
-      - /mnt/data/config/calibre:/config/calibre
+      - /mnt/data/config/calibre/Calibre Library:/config/Calibre Library
       - /mnt/data/books:/books
       - /mnt/data/torrent/downloads/complete/readarr:/downloads
     ports:
