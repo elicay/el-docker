@@ -150,6 +150,7 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /mnt/data/config/calibre:/config
+      - /mnt/data/books:/books
     ports:
       - 8080:8080
       - 8181:8181
