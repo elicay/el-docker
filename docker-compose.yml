@@ -159,8 +159,8 @@ services:
 
   mssql:
     container_name: mssql
-    image: mcr.microsoft.com/mssql/server:2022-preview-ubuntu-22.04
-    restart: always
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: unless-stopped
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=!adminpass123
@@ -170,8 +170,7 @@ services:
     ports:
       - 1433:1433
     volumes:
-      - /mnt/data/config/mssql/opt:/opt/mssql
-      - /mnt/data/config/mssql/var:/var/mssql
+      - /mnt/data/config/mssql:/var/opt/mssql
 
   # mongo:
   #   image: mongo
