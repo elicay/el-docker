@@ -170,7 +170,7 @@ services:
     ports:
       - 1433:1433
     volumes:
-      - /mnt/config/mssql:/var/mssql
+      - /mnt/data/config/mssql:/var/mssql
 
   # mongo:
   #   image: mongo
