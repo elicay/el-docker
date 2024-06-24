@@ -161,7 +161,6 @@ services:
     container_name: mssql
     image: mcr.microsoft.com/mssql/server:2022-latest
     restart: unless-stopped
-    user: errold
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=!adminpass123
