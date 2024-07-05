@@ -38,6 +38,8 @@ services:
       - /mnt/data/config/deluge:/config
       - /mnt/data/torrent/downloads:/downloads
     restart: unless-stopped
+    depends_on:
+      - gluetun
 
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
