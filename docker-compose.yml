@@ -34,6 +34,8 @@ services:
     volumes:
       - /mnt/data/config/transmission:/config
       - /mnt/data/torrent/downloads:/downloads
+    depends_on:
+      - gluetun
     ports:
       - 9091:9091
       - 51412:51412
