@@ -2,6 +2,7 @@ version: '3.8'
 services:
   gluetun:
     image: qmcgaw/gluetun
+    container_name: gluetun
     cap_add:
       - NET_ADMIN
     devices:
@@ -22,7 +23,7 @@ services:
       - OPENVPN_USER=${GLUETUN_USR}
       - OPENVPN_PASSWORD=${GLUETUN_PWD}
       - TZ=Etc/UTC
-      - SERVER_REGIONS=Japan
+      - SERVER_REGIONS="US West"
       - UPDATE_PERIOD=24h
 
   deluge:
