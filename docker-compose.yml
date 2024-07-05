@@ -22,7 +22,7 @@ services:
       - OPENVPN_USER=${GLUETUN_USR}
       - OPENVPN_PASSWORD=${GLUETUN_PWD}
       - TZ=Etc/UTC
-      - SERVER_REGIONS=Tokyo
+      - SERVER_REGIONS=Japan
       - UPDATE_PERIOD=24h
 
   deluge:
