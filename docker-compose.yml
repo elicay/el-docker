@@ -19,12 +19,10 @@ services:
       - /mnt/data/config/gluetun:/gluetun
     environment:
       - VPN_SERVICE_PROVIDER=windscribe
-      - VPN_TYPE=wireguard
-      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
-      - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
-      - WIREGUARD_PRESHARED_KEY=${WIREGUARD_PRESHARED_KEY}
+      - VPN_TYPE=openvpn
+      - OPENVPN_USER=${GLUETUN_USR}
+      - OPENVPN_PASSWORD=${GLUETUN_PWD}
       - TZ=Etc/UTC
-      - SERVER_REGIONS="US West"
       - UPDATE_PERIOD=24h
 
   deluge:
