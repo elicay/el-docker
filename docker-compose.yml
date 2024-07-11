@@ -34,8 +34,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      - USER= ${TRANS_USR}
-      - PASS= ${TRANS_PWD}
+      - USER=${TRANS_USR}
+      - PASS=${TRANS_PWD}
     volumes:
       - /mnt/data/confg/transmission:/config
       - /mnt/data/downloads:/downloads
