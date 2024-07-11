@@ -37,7 +37,7 @@ services:
       - USER=${TRANS_USR}
       - PASS=${TRANS_PWD}
     volumes:
-      - /mnt/data/confg/transmission:/config
+      - /mnt/data/config/transmission:/config
       - /mnt/data/torrent/downloads:/downloads
     restart: unless-stopped
 
