@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 services:
   gluetun:
     image: qmcgaw/gluetun
@@ -10,11 +10,10 @@ services:
     ports:
       - 8888:8888/tcp
       - 8388:8388/tcp
-      - 8388:8388/udp 
-      - 8112:8112
-      - 6881:6881
-      - 6881:6881/udp
-      - 58846:58846
+      - 8388:8388/udp
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
     volumes:
       - /mnt/data/config/gluetun:/gluetun
     environment:
@@ -25,21 +24,22 @@ services:
       - TZ=Etc/UTC
       - UPDATE_PERIOD=24h
 
-  deluge:
-    image: lscr.io/linuxserver/deluge:latest
-    container_name: deluge
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    depends_on:
+      - gluetun
     network_mode: "service:gluetun"
+    container_name: transmission
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      - DELUGE_LOGLEVEL=error
+      - USER= ${TRANS_USR}
+      - PASS= ${TRANS_PWD}
     volumes:
-      - /mnt/data/config/deluge:/config
-      - /mnt/data/torrent/downloads:/downloads
+      - /mnt/data/confg/transmission:/config
+      - /mnt/data/downloads:/downloads
     restart: unless-stopped
-    depends_on:
-      - gluetun
 
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
@@ -76,20 +76,6 @@ services:
       - /mnt/data/tutorials:/tutorials
     restart: unless-stopped
 
-  kavita:
-    image: jvmilazz0/kavita:latest
-    container_name: kavita
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - /mnt/data/config/kavita:/kavita/config
-      - /mnt/data/books:/books
-    ports:
-      - '5000:5000'
-    restart: unless-stopped
-
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
@@ -101,21 +87,6 @@ services:
       - /mnt/data/config/prowlarr:/config
     ports:
       - 9696:9696
-    restart: unless-stopped
-
-  lidarr:
-    image: lscr.io/linuxserver/lidarr:latest
-    container_name: lidarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - /mnt/data/config/lidarr:/config
-      - /mnt/data/music:/music 
-      - /mnt/data/torrent/downloads:/downloads
-    ports:
-      - 8686:8686
     restart: unless-stopped
 
   readarr:
@@ -164,24 +135,6 @@ services:
       - 8989:8989
     restart: unless-stopped
 
-  calibre:
-    image: lscr.io/linuxserver/calibre:latest
-    container_name: calibre
-    security_opt:
-      - seccomp:unconfined 
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - /mnt/data/config/calibre:/config
-      - /mnt/data/books:/books
-    ports:
-      - 8080:8080
-      - 8181:8181
-      - 8081:8081
-    restart: unless-stopped
-
   mssql:
     container_name: mssql
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -197,5 +150,3 @@ services:
       - 1433:1433
     volumes:
       - /mnt/data/config/mssql:/var/opt/mssql
-
-
