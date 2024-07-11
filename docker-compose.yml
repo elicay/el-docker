@@ -135,6 +135,21 @@ services:
       - 8989:8989
     restart: unless-stopped
 
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /mnt/data/config/lidarr:/config
+      - /mnt/data/music:/music 
+      - /mnt/data/torrent/downloads:/downloads
+    ports:
+      - 8686:8686
+    restart: unless-stopped
+
   mssql:
     container_name: mssql
     image: mcr.microsoft.com/mssql/server:2022-latest
