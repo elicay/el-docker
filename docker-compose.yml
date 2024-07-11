@@ -99,7 +99,7 @@ services:
     volumes:
       - /mnt/data/config/radarr:/config
       - /mnt/data/movies:/movies
-      - /mnt/data/torrent/downloads/complete:/downloads
+      - /mnt/data/torrent/downloads/complete/radarr:/downloads
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -114,7 +114,7 @@ services:
     volumes:
       - /mnt/data/config/sonarr:/config
       - /mnt/data/tv:/tv
-      - /mnt/data/torrent/downloads/complete:/downloads
+      - /mnt/data/torrent/downloads/complete/sonarr:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -129,7 +129,7 @@ services:
     volumes:
       - /mnt/data/config/lidarr:/config
       - /mnt/data/music:/music 
-      - /mnt/data/torrent/downloads/complete:/downloads
+      - /mnt/data/torrent/downloads/complete/lidarr:/downloads
     ports:
       - 8686:8686
     restart: unless-stopped
