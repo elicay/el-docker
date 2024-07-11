@@ -38,7 +38,7 @@ services:
       - PASS=${TRANS_PWD}
     volumes:
       - /mnt/data/confg/transmission:/config
-      - /mnt/data/downloads:/downloads
+      - /mnt/data/torrent/downloads:/downloads
     restart: unless-stopped
 
   jellyfin:
