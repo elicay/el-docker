@@ -89,22 +89,6 @@ services:
       - 9696:9696
     restart: unless-stopped
 
-  readarr:
-    image: lscr.io/linuxserver/readarr:develop
-    container_name: readarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/London
-    volumes:
-      - /mnt/data/config/readarr:/config
-      - /mnt/data/config/calibre/Calibre Library:/config/Calibre Library
-      - /mnt/data/books:/books
-      - /mnt/data/torrent/downloads:/downloads
-    ports:
-      - 8787:8787
-    restart: unless-stopped
-
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
@@ -115,7 +99,7 @@ services:
     volumes:
       - /mnt/data/config/radarr:/config
       - /mnt/data/movies:/movies
-      - /mnt/data/torrent/downloads:/downloads
+      - /mnt/data/torrent/downloads/complete:/downloads
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -130,7 +114,7 @@ services:
     volumes:
       - /mnt/data/config/sonarr:/config
       - /mnt/data/tv:/tv
-      - /mnt/data/torrent/downloads:/downloads
+      - /mnt/data/torrent/downloads/complete:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -145,7 +129,7 @@ services:
     volumes:
       - /mnt/data/config/lidarr:/config
       - /mnt/data/music:/music 
-      - /mnt/data/torrent/downloads:/downloads
+      - /mnt/data/torrent/downloads/complete:/downloads
     ports:
       - 8686:8686
     restart: unless-stopped
