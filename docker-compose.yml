@@ -7,8 +7,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      - USER=${EHOME_USER}
-      - PASS=${EHOME_PWD}
+      - USER=${TRANS_USR}
+      - PASS=${TRANS_PWD}
     ports:
       - 9091:9091
       - 51413:51413
