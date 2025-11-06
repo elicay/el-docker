@@ -1,0 +1,51 @@
+# Ignore environment files containing secrets
+.env
+.env.*
+
+# Docker / Compose local overrides
+docker-compose.override.yml
+docker-compose.*.yml
+
+# Docker generated files
+docker-compose.vscode.yml
+**/volumes/
+
+# Ignore node and python artifacts
+node_modules/
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/editor
+.vscode/
+.idea/
+*.iml
+
+# Build outputs
+dist/
+build/
+
+# Keys and secrets
+secrets/
+*.key
+
+# Misc
+coverage/
+coverage.xml
+npm-debug.log*
+
+# Local data directories (if you accidentally keep data under repo)
+# Uncomment or add specific paths if you store runtime data inside the repo
+# data/
+# db/
+
+config/

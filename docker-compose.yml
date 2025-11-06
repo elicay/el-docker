@@ -7,8 +7,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      - USER=${TRANS_USR}
-      - PASS=${TRANS_PWD}
+      - USER=${DEFAULT_USER}
+      - PASS=${DEFAULT_PASS}
     ports:
       - 9091:9091
       - 51413:51413
@@ -21,36 +21,22 @@ services:
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
+    user: root
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
+      - JELLYFIN_PublishedServerUrl=http://ehome.local/jellyfin
     volumes:
       - ${DATA_PATH}/config/jellyfin:/config
+      - ${DATA_PATH}/config/jellyfin/data:/data
+      - ${DATA_PATH}/config/jellyfin/transcode:/transcode
       - ${DATA_PATH}/movies:/movies
       - ${DATA_PATH}/tv:/tv
       - ${DATA_PATH}/music:/music
       - ${DATA_PATH}/tutorials:/tutorials
     ports:
       - 8096:8096
-    restart: unless-stopped
-
-  plex:
-    image: lscr.io/linuxserver/plex:latest
-    container_name: plex
-    network_mode: host
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - VERSION=docker
-      - PLEX_CLAIM=claim-S6zsEvddnqDvCGSMxULG
-    volumes:
-      - ${DATA_PATH}/config/plex:/config
-      - ${DATA_PATH}/movies:/movies
-      - ${DATA_PATH}/tv:/tv
-      - ${DATA_PATH}/music:/music
-      - ${DATA_PATH}/tutorials:/tutorials
     restart: unless-stopped
 
   prowlarr:
@@ -76,7 +62,7 @@ services:
     volumes:
       - ${DATA_PATH}/config/radarr:/config
       - ${DATA_PATH}/movies:/movies
-      - ${DATA_PATH}/torrent/downloads/complete/radarr:/downloads
+      - ${DATA_PATH}/torrent/downloads:/downloads
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -91,7 +77,7 @@ services:
     volumes:
       - ${DATA_PATH}/config/sonarr:/config
       - ${DATA_PATH}/tv:/tv
-      - ${DATA_PATH}/torrent/downloads/complete/sonarr:/downloads
+      - ${DATA_PATH}/torrent/downloads:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -105,8 +91,8 @@ services:
       - TZ=Etc/UTC
     volumes:
       - ${DATA_PATH}/config/lidarr:/config
-      - ${DATA_PATH}/music:/music 
-      - ${DATA_PATH}/torrent/downloads/complete/lidarr:/downloads
+      - ${DATA_PATH}/music:/music
+      - ${DATA_PATH}/torrent/downloads:/downloads
     ports:
       - 8686:8686
     restart: unless-stopped
@@ -126,3 +112,28 @@ services:
       - 1433:1433
     volumes:
       - ${DATA_PATH}/config/mssql:/var/opt/mssql
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - /mnt/data/config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /mnt/data/config/nginx/conf.d:/etc/nginx/conf.d:ro
+    ports:
+      - 80:80
+    depends_on:
+      - transmission
+      - jellyfin
+      - prowlarr
+      - radarr
+      - sonarr
+      - lidarr
+    restart: unless-stopped
+
+  flaresolverr:
+    image: flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    restart: unless-stopped
+    ports:
+      - "8191:8191"
+
